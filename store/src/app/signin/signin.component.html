@@ -1,0 +1,31 @@
+<div class="card m-3">
+  <h5 class="card-header">Welcome User</h5>
+  <div class="card-body">
+    <div class="alert alert-danger" role="alert" *ngIf="errors">
+        Here is the error : {{ errorMessage }}.
+      </div>
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label>User Name</label>
+              <input type="text" formControlName="UserName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.UserName.errors }" />
+              <div *ngIf="submitted && f.UserName.errors" class="invalid-feedback">
+                  <div *ngIf="f.UserName.errors.required">User Name is required</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col">
+                  <label>Password</label>
+                  <input type="Password" formControlName="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }" />
+                  <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                      <div *ngIf="f.Password.errors.required">Password is required</div>
+                      <div *ngIf="f.Password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+              </div>
+              
+            </div>
+          <div class="text-center">
+              <button class="btn btn-primary mr-1">Sign In</button>
+          </div>
+      </form>
+  </div>
+</div>

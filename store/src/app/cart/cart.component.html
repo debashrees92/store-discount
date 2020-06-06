@@ -1,0 +1,56 @@
+<div class="container bg-light">
+  <div class="py-5 text-center">
+    &nbsp;&nbsp;&nbsp;
+    <h2>Checkout form</h2>
+  </div>
+  <div class="text-right">
+    <button class="btn btn-primary mr-1 pull-right text-right" type="button" (click)="Logout()" routerLinkActive="active">LogOut</button>
+  </div>
+  <div class="alert alert-danger"
+     role="alert" *ngIf="error">
+        Here is the error : {{ errorMessage }}.
+  </div>
+  <form >
+  <div class="row">
+    <div class="col-md-12 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let product of productData">
+          <div>
+            <h6 class="my-0">{{product.ProductName}}</h6>
+            <input value="{{product.Id}}" name="ProductId" type="hidden">
+            <small class="text-muted">{{product.Description}}</small>
+          </div>
+          
+          <span class="def-number-input number-input safari_only">
+            <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus" (click)= "handleUpdateCart(product.Id,myQty.value)"></button>
+            <input class="quantity" min="1" max="10" value="1" name="quantity" type="number" #myQty>
+            <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus" (click)= "handleUpdateCart(product.Id,myQty.value)"></button>
+          </span>
+          <span class="text-muted">${{product.Price}}</span>
+        </li>
+        
+        <li class="list-group-item d-flex justify-content-between bg-light">
+          <div class="text-success">
+            <h6 class="my-0">Total Discount</h6>
+          </div>
+          <span class="text-success">-${{discTotal}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Sub Total</span>
+          <strong>${{cartSubTotal}}</strong>
+        </li>
+        
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total</span>
+          <strong> $ {{cartTotal}}</strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </form>
+</div>
+
+
